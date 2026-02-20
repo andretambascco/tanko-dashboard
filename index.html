@@ -1,31 +1,32 @@
-exports.handler = async function (event) {
-  const { adAccountId, accessToken, fields } = event.queryStringParameters || {};
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tankö Dashboard</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.8.0/Recharts.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, sans-serif; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+    const { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } = Recharts;
 
-  if (!adAccountId || !accessToken) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: "adAccountId e accessToken são obrigatórios." }),
-    };
-  }
+    // ── COLE AQUI O CONTEÚDO DO ARTIFACT (tudo entre export default...) ──
 
-  const f = fields || "id,name,currency,timezone_name,account_status,amount_spent,balance,spend_limit";
-  const url = `https://graph.facebook.com/v19.0/${adAccountId}?fields=${f}&access_token=${accessToken}`;
-
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    return {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-  } catch (err) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: err.message }),
-    };
-  }
-};
+  </script>
+  <script>
+    // Renderiza o app
+    const domContainer = document.getElementById('root');
+    const root = ReactDOM.createRoot(domContainer);
+    root.render(React.createElement(App));
+  </script>
+</body>
+</html>
